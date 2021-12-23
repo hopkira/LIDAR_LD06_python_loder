@@ -1,11 +1,9 @@
 import serial
-import binascii
+# import binascii
 from CalcLidarData import CalcLidarData
 import math
-import sys
 import pandas as pd
 import numpy as np
-import time
 
 ser = serial.Serial(port='/dev/lidar360',
                     baudrate=230400,
@@ -22,7 +20,7 @@ distances = list()
 angle_bins = pd.interval_range(start = 0, end = 2*math.pi, periods = 90)
 mid_points = angle_bins.mid.tolist()
 
-last = time.time()
+#last = time.time()
 
 i = 0
 while True:
@@ -50,9 +48,9 @@ while True:
         angles.clear()
         distances.clear()
         i = 0
-        now = time.time()
-        print(now-last)
-        last = now
+        #now = time.time()
+        #print(now-last)
+        #last = now
 
     while loopFlag:
         b = ser.read()
