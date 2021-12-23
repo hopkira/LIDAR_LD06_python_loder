@@ -16,7 +16,9 @@ lines = list()
 angles = list()
 distances = list()
 
+# Create a number of bins covering 360 degrees (2xPI radians)
 angle_bins = pd.interval_range(start = 0, end = 2*math.pi, periods = 90)
+# Calculate a list of mid-points to calculate cartesian co-ords
 mid_points = angle_bins.mid.tolist()
 
 #last = time.time()
@@ -71,10 +73,9 @@ while True:
 
             lidarData = CalcLidarData(tmpString[0:-5])
 
-            # process data
+            # Add angles and distance data to the lists
             angles.extend(lidarData.Angle_i)
             distances.extend(lidarData.Distance_i)
-            ### finish
 
             tmpString = ""
             loopFlag = False
