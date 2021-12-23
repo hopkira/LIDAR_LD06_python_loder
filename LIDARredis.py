@@ -25,26 +25,28 @@ i = 0
 while True:
     loopFlag = True
     flag2c = False
-
+    # collect 429 readings (complete circle)
     if(i % 40 == 39):
-
+        # create a numpy array from angles/distances pairs
         readings = np.column_stack((angles,distances))
+        # work out which reading fits in which angle bin
         bin_index = pd.cut(readings[:,0], angle_bins)
+        # put the distances into the right bins
         binned_distances = pd.Series(readings[:,1])
+        # choose the closest reading in each bin
         min_dists = binned_distances.groupby([bin_index]).min()
+        # turn the 90 min dist readings into an array
         min_dists = min_dists.values.reshape(90)
-
+        # convert the polar co-ordinates into x and y arrrays
         x = min_dists * np.cos(mid_points)
         y = min_dists * np.sin(mid_points)
-
+        # collect the x and y arrays into a single array
         final = np.column_stack((x,y))
-
         # print("angles:",min(angles),max(angles),"distances:",min(distances),max(distances))
         print(final)
         angles.clear()
         distances.clear()
         i = 0
-        sys.exit(0)
 
     while loopFlag:
         b = ser.read()
