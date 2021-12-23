@@ -3,6 +3,8 @@ import binascii
 from CalcLidarData import CalcLidarData
 import math
 import sys
+import pandas as pd
+import numpy as np
 
 ser = serial.Serial(port='/dev/lidar360',
                     baudrate=230400,
@@ -16,15 +18,25 @@ lines = list()
 angles = list()
 distances = list()
 
+angle_bins = pd.interval_range(start = 0, end = 2*math.pi, periods = 90)
+
 i = 0
 while True:
     loopFlag = True
     flag2c = False
 
     if(i % 40 == 39):
+
+        readings = np.column_stack((angles,distances))
+        bin_index = pd.cut(readings[:,0], angle_bins)
+        binned_distances = pd.Series(readings[:,1])
+        totals = binned_distances.groupby([bin_index].min())
+        totals = totals.values.reshape(90,1)
+
         print("angles:",min(angles),max(angles),"distances:",min(distances),max(distances))
         print(angles)
         print(distances)
+        print(totals)
         i = 0
         sys.exit(0)
 
