@@ -19,6 +19,7 @@ angles = list()
 distances = list()
 
 angle_bins = pd.interval_range(start = 0, end = 2*math.pi, periods = 90)
+print(angle_bins)
 
 i = 0
 while True:
@@ -30,8 +31,9 @@ while True:
         readings = np.column_stack((angles,distances))
         bin_index = pd.cut(readings[:,0], angle_bins)
         binned_distances = pd.Series(readings[:,1])
-        totals = binned_distances.groupby([bin_index]).min()
-        #totals = totals.values.reshape(90)
+        min_dists = binned_distances.groupby([bin_index]).min()
+        min_dists = totals.values.reshape(90)
+        
 
         print("angles:",min(angles),max(angles),"distances:",min(distances),max(distances))
         print(totals)
