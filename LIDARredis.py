@@ -22,6 +22,8 @@ distances = list()
 angle_bins = pd.interval_range(start = 0, end = 2*math.pi, periods = 90)
 mid_points = angle_bins.mid.tolist()
 
+last = time.time()
+
 i = 0
 while True:
     loopFlag = True
@@ -48,7 +50,9 @@ while True:
         angles.clear()
         distances.clear()
         i = 0
-        print(time.time())
+        now = time.time()
+        print(now-last)
+        last = now
 
     while loopFlag:
         b = ser.read()
