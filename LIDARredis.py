@@ -22,7 +22,7 @@ while True:
     flag2c = False
 
     if(i % 40 == 39):
-        print("angles:",len(angles),"distances:",len(distances))
+        print("angles:",min(angles),max(angles),"distances:",min(distances),max(distances))
         print(angles)
         print(distances)
         i = 0
