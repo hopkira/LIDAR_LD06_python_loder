@@ -5,6 +5,7 @@ import math
 import sys
 import pandas as pd
 import numpy as np
+import time
 
 ser = serial.Serial(port='/dev/lidar360',
                     baudrate=230400,
@@ -43,10 +44,11 @@ while True:
         # collect the x and y arrays into a single array
         final = np.column_stack((x,y))
         # print("angles:",min(angles),max(angles),"distances:",min(distances),max(distances))
-        print(final)
+        #print(final)
         angles.clear()
         distances.clear()
         i = 0
+        print(time.time())
 
     while loopFlag:
         b = ser.read()
