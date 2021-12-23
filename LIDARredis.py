@@ -34,7 +34,7 @@ while True:
         binned_distances = pd.Series(readings[:,1])
         min_dists = binned_distances.groupby([bin_index]).min()
         min_dists = min_dists.values.reshape(90)
-        final = np.column_stack(mid_points,min_dists)
+        final = np.column_stack((mid_points,min_dists))
 
         print("angles:",min(angles),max(angles),"distances:",min(distances),max(distances))
         print(final)
