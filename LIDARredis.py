@@ -19,7 +19,7 @@ angles = list()
 distances = list()
 
 angle_bins = pd.interval_range(start = 0, end = 2*math.pi, periods = 90)
-mid_points = angle_bins.mid.reshape(90)
+mid_points = angle_bins.mid.tolist()
 print(mid_points)
 
 i = 0
