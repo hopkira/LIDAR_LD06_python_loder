@@ -16,9 +16,17 @@ lines = list()
 angles = list()
 distances = list()
 
+i = 0
 while True:
     loopFlag = True
     flag2c = False
+
+    if(i % 40 == 39):
+        print("angles:",len(angles),"distances:",len(distances))
+        print(angles)
+        print(distances)
+        i = 0
+        sys.exit(0)
 
     while loopFlag:
         b = ser.read()
@@ -43,10 +51,6 @@ while True:
             # process data
             angles.extend(lidarData.Angle_i)
             distances.extend(lidarData.Distance_i)
-            print("angles:",len(angles),"distances:",len(distances))
-            print(angles)
-            print(distances)
-            sys.exit()
             ### finish
 
             tmpString = ""
@@ -55,5 +59,7 @@ while True:
             tmpString += b.hex()+" "
         
         flag2c = False
+
+    i +=1
 
 ser.close()
