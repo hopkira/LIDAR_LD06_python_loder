@@ -43,6 +43,7 @@ while True:
             # process data
             angles.extend(lidarData.Angle_i)
             distances.extend(lidarData.Distance_i)
+            print("angles:",len(angles),"distances:",len(distances))
             print(angles)
             print(distances)
             sys.exit()
