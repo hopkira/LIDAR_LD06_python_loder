@@ -30,7 +30,7 @@ while True:
         readings = np.column_stack((angles,distances))
         bin_index = pd.cut(readings[:,0], angle_bins)
         binned_distances = pd.Series(readings[:,1])
-        totals = binned_distances.groupby([bin_index].mean())
+        totals = binned_distances.groupby([bin_index]).min()
         totals = totals.values.reshape(90,1)
 
         print("angles:",min(angles),max(angles),"distances:",min(distances),max(distances))
