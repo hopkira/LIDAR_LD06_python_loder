@@ -8,12 +8,9 @@ class LidarData:
         self.CS = CS
         self.Speed = Speed
         self.TimeStamp = TimeStamp
-
         self.Confidence_i = Confidence_i
         self.Angle_i = Angle_i
         self.Distance_i = Distance_i
-
-
 
 def CalcLidarData(str):
     str = str.replace(' ','')
@@ -41,7 +38,5 @@ def CalcLidarData(str):
         Angle_i.append(circle(angleStep*counter+FSA)*math.pi/180.0)
         counter += 1
     
-
     lidarData = LidarData(FSA,LSA,CS,Speed,TimeStamp,Confidence_i,Angle_i,Distance_i)
     return lidarData
-    
