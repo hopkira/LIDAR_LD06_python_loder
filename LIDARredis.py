@@ -1,5 +1,4 @@
 import serial
-# import binascii
 from CalcLidarData import CalcLidarData
 import math
 import pandas as pd
