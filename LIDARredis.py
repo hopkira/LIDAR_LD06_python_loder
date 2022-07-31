@@ -47,6 +47,7 @@ try:
             final = np.column_stack((x,y))
             # print("angles:",min(angles),max(angles),"distances:",min(distances),max(distances))
             # final needs to be transmitted to Redis
+            plt.clear()
             plt.plot(x,y)
             plt.show()
             # Now get next set of readings
