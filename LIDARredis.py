@@ -53,6 +53,7 @@ try:
             # final needs to be transmitted to Redis
             # plt.clear()
             plt.plot(x,y)
+            plt.plot().invert_yaxis()
             plt.show()
             # Now get next set of readings
             angles.clear()
