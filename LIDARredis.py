@@ -62,6 +62,7 @@ try:
             #now = time.time()
             #print(now-last)
             #last = now
+            print(final)
 
         while loopFlag:
             b = ser.read()
