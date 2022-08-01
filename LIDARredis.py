@@ -53,34 +53,26 @@ try:
             min_dists = min_dists.values.reshape(segments)
             # narrow the min distances to the angles that can be seen
             min_dists = min_dists[lidar_start:lidar_end]
-
-            # Find the minumum of min_dists - boundary
-            # If the minumum is less than zero then red
-            # otherwise green
-
-
+            # Check if it is safe to turn
+            if  np.amin(min_dists - boundary) < 0:
+                print('Not safe to turn')
             # Visualize
             # convert the polar co-ordinates into x and y arrrays
-            x = min_dists * np.cos(mid_points)
-            y = min_dists * np.sin(mid_points)
-
-
-            # collect the x and y arrays into a single array
-            final = np.column_stack((x,y))
-            # print("angles:",min(angles),max(angles),"distances:",min(distances),max(distances))
-            # final needs to be transmitted to Redis
-            # plt.clear()
-            plt.plot(x,y)
-            plt.plot(x1,y1)
-            plt.gca().invert_yaxis()
-            plt.show() 
+            # x = min_dists * np.cos(mid_points)
+            # y = min_dists * np.sin(mid_points)
+            # final = np.column_stack((x,y))
+            # plt.plot(x,y)
+            # plt.plot(x1,y1)
+            # plt.gca().invert_yaxis()
+            # plt.show() 
+            #now = time.time()
+            #print(now-last)
+            #last = now
             # Now get next set of readings
             angles.clear()
             distances.clear()
             i = 0
-            #now = time.time()
-            #print(now-last)
-            #last = now
+
 
         while loopFlag:
             b = ser.read()
