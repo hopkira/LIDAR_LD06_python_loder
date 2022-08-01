@@ -40,6 +40,10 @@ try:
             min_dists = binned_distances.groupby([bin_index]).min()
             # turn the 90 min dist readings into an array
             min_dists = min_dists.values.reshape(90)
+            # this may be the most efficient way for the robot to understand
+            # can easily do Maths on segments less than s or y
+            # also cut this array down from 90 to the ones that are valid
+
             # convert the polar co-ordinates into x and y arrrays
             x = min_dists * np.cos(mid_points)
             y = min_dists * np.sin(mid_points)
