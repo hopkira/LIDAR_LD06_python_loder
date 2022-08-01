@@ -13,7 +13,7 @@ ser = serial.Serial(port='/dev/lidar360',
                     stopbits=1)
 
 tmpString = ""
-lines = list()
+
 angles = list()
 distances = list()
 
@@ -26,13 +26,13 @@ mid_points = angle_bins.mid.tolist()
 try:
     i = 0
     while True:
+        plt.ion()
         loopFlag = True
         flag2c = False
         # collect 429 readings (complete circle)
         if(i % 40 == 39):
             # create a numpy array from angles/distances pairs
             readings = np.column_stack((angles,distances))
-            print(readings)
             # work out which reading fits in which angle bin
             bin_index = pd.cut(readings[:,0], angle_bins)
             # put the distances into the right bins
@@ -55,7 +55,7 @@ try:
             # plt.clear()
             plt.plot(x,y)
             plt.gca().invert_yaxis()
-            plt.show()
+            plt.draw()  
             # Now get next set of readings
             angles.clear()
             distances.clear()
