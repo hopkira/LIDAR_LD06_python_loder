@@ -50,7 +50,7 @@ try:
             x = min_dists * np.cos(mid_points)
             y = min_dists * np.sin(mid_points)
 
-            x1 = 5.5 * np.cos(mid_points)
+            x1 = 7.0 * np.cos(mid_points)
             y1 = 5.5 * np.sin(mid_points)
             # collect the x and y arrays into a single array
             final = np.column_stack((x,y))
