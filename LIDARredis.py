@@ -49,12 +49,16 @@ try:
             # convert the polar co-ordinates into x and y arrrays
             x = min_dists * np.cos(mid_points)
             y = min_dists * np.sin(mid_points)
+
+            x1 = 0.55 * np.cos(mid_points)
+            y1 = 0.55 * np.sin(mid_points)
             # collect the x and y arrays into a single array
             final = np.column_stack((x,y))
             # print("angles:",min(angles),max(angles),"distances:",min(distances),max(distances))
             # final needs to be transmitted to Redis
             # plt.clear()
             plt.plot(x,y)
+            plt.plot(x1,y1)
             plt.gca().invert_yaxis()
             plt.show() 
             # Now get next set of readings
