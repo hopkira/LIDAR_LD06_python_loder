@@ -32,6 +32,7 @@ try:
         if(i % 40 == 39):
             # create a numpy array from angles/distances pairs
             readings = np.column_stack((angles,distances))
+            print(readings)
             # work out which reading fits in which angle bin
             bin_index = pd.cut(readings[:,0], angle_bins)
             # put the distances into the right bins
@@ -62,7 +63,6 @@ try:
             #now = time.time()
             #print(now-last)
             #last = now
-            print(final)
 
         while loopFlag:
             b = ser.read()
