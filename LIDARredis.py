@@ -21,6 +21,7 @@ distances = list()
 angle_bins = pd.interval_range(start = 0, end = 2*math.pi, periods = 90)
 # Calculate a list of mid-points to calculate cartesian co-ords
 mid_points = angle_bins.mid.tolist()
+mid_points = mid_points[15:76]
 
 #last = time.time()
 try:
@@ -43,7 +44,7 @@ try:
             # this may be the most efficient way for the robot to understand
             # can easily do Maths on segments less than s or y
             # also cut this array down from 90 to the ones that are valid
-            mid_points = mid_points[15:76]
+
             min_dists = min_dists[15:76]
             # convert the polar co-ordinates into x and y arrrays
             x = min_dists * np.cos(mid_points)
