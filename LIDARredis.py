@@ -26,7 +26,6 @@ mid_points = angle_bins.mid.tolist()
 try:
     i = 0
     while True:
-        plt.ion()
         loopFlag = True
         flag2c = False
         # collect 429 readings (complete circle)
@@ -55,7 +54,7 @@ try:
             # plt.clear()
             plt.plot(x,y)
             plt.gca().invert_yaxis()
-            plt.draw()  
+            plt.show() 
             # Now get next set of readings
             angles.clear()
             distances.clear()
