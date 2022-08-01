@@ -43,8 +43,8 @@ try:
             # this may be the most efficient way for the robot to understand
             # can easily do Maths on segments less than s or y
             # also cut this array down from 90 to the ones that are valid
-            mid_points = mid_points[16:77]
-            min_dists = min_dists[16:77]
+            mid_points = mid_points[15:76]
+            min_dists = min_dists[15:76]
             # convert the polar co-ordinates into x and y arrrays
             x = min_dists * np.cos(mid_points)
             y = min_dists * np.sin(mid_points)
