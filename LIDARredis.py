@@ -1,3 +1,4 @@
+from cmath import sqrt
 import serial
 from CalcLidarData import CalcLidarData
 import math
@@ -16,12 +17,21 @@ tmpString = ""
 
 angles = list()
 distances = list()
+lidar_start = 15
+lidar_end = 76
+segments = 90
 
 # Create a number of bins covering 360 degrees (2xPI radians)
-angle_bins = pd.interval_range(start = 0, end = 2*math.pi, periods = 90)
+angle_bins = pd.interval_range(start = 0, end = 2*math.pi, periods = segments)
 # Calculate a list of mid-points to calculate cartesian co-ords
 mid_points = angle_bins.mid.tolist()
-mid_points = mid_points[15:76]
+x1 = 7.0 * np.cos(mid_points)
+y1 = 5.5 * np.sin(mid_points)
+ellipse = np.column_stack((x1,y1))
+origin = [0,0]
+boundary = np.linalg.norm(ellipse - origin, axis=1)
+boundary = boundary[lidar_start:lidar_end]
+mid_points = mid_points[lidar_start:lidar_end] # narrow list to angles that the device can see
 
 #last = time.time()
 try:
@@ -40,18 +50,21 @@ try:
             # choose the closest reading in each bin
             min_dists = binned_distances.groupby([bin_index]).min()
             # turn the 90 min dist readings into an array
-            min_dists = min_dists.values.reshape(90)
-            # this may be the most efficient way for the robot to understand
-            # can easily do Maths on segments less than s or y
-            # also cut this array down from 90 to the ones that are valid
+            min_dists = min_dists.values.reshape(segments)
+            # narrow the min distances to the angles that can be seen
+            min_dists = min_dists[lidar_start:lidar_end]
 
-            min_dists = min_dists[15:76]
+            # Find the minumum of min_dists - boundary
+            # If the minumum is less than zero then red
+            # otherwise green
+
+
+            # Visualize
             # convert the polar co-ordinates into x and y arrrays
             x = min_dists * np.cos(mid_points)
             y = min_dists * np.sin(mid_points)
 
-            x1 = 7.0 * np.cos(mid_points)
-            y1 = 5.5 * np.sin(mid_points)
+
             # collect the x and y arrays into a single array
             final = np.column_stack((x,y))
             # print("angles:",min(angles),max(angles),"distances:",min(distances),max(distances))
