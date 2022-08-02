@@ -34,6 +34,9 @@ boundary = boundary[lidar_start:lidar_end]
 mid_points = mid_points[lidar_start:lidar_end] # narrow list to angles that the device can see
 
 # TODO need a routine to calculate blockers behind the dog
+# https://stackoverflow.com/questions/33051244/numpy-filter-points-within-bounding-box
+# https://stackoverflow.com/questions/42352622/finding-points-within-a-bounding-box-with-numpy
+
 
 #last = time.time()
 try:
