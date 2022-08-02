@@ -1,15 +1,15 @@
-from cmath import sqrt
 import serial
 from CalcLidarData import CalcLidarData
 import math
 import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
+from memory import Memory as mem
 
 ser = serial.Serial(port='/dev/lidar360',
                     baudrate=230400,
                     timeout=5.0,
-                    bytesize=8,
+                    bytesize=8, 
                     parity='N',
                     stopbits=1)
 
@@ -33,6 +33,8 @@ boundary = np.linalg.norm(ellipse - origin, axis=1)
 boundary = boundary[lidar_start:lidar_end]
 mid_points = mid_points[lidar_start:lidar_end] # narrow list to angles that the device can see
 
+# TODO need a routine to calculate blockers behind the dog
+
 #last = time.time()
 try:
     i = 0
@@ -54,8 +56,11 @@ try:
             # narrow the min distances to the angles that can be seen
             min_dists = min_dists[lidar_start:lidar_end]
             # Check if it is safe to turn
-            if  np.amin(min_dists - boundary) < 0:
-                print('Not safe to turn')
+            # A negative figure means it isn't; a positive one means it is
+            # the scale of the value gives an indication of how safe it is 
+            # to rotate
+            minimum_distance = np.amin(min_dists - boundary)
+            mem.storeState("rotate",minimum_distance)
             # Visualize
             # convert the polar co-ordinates into x and y arrrays
             # x = min_dists * np.cos(mid_points)
