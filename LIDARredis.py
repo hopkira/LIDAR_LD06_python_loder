@@ -57,6 +57,7 @@ try:
         # collect 429 readings (complete circle)
         if(i % 40 == 39):
             # create a numpy array from angles/distances pairs
+            print(str(len(angles)), str(len(distances)))
             readings = np.column_stack((angles,distances))
             # work out which reading fits in which angle bin
             bin_index = pd.cut(readings[:,0], angle_bins)
