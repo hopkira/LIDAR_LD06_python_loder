@@ -54,9 +54,10 @@ try:
     while True:
         loopFlag = True
         flag2c = False
-        # collect 429 readings (complete circle)
-        if(i % 40 == 39):
-            # create a numpy array from angles/distances pairs
+        # collect 468 readings (complete circle)
+        if len(angles) == 468 and len(distances) == 468:
+            # if(i % 40 == 39):
+            # create a numpy array from 468 angles/distances pair
             print("points:",str(len(angles)), str(len(distances)))
             readings = np.column_stack((angles,distances))
             # work out which reading fits in which angle bin
