@@ -27,8 +27,8 @@ segments = 90
 angle_bins = pd.interval_range(start = 0, end = 2*math.pi, periods = segments)
 # Calculate a list of mid-points to calculate cartesian co-ords
 mid_points = angle_bins.mid.tolist()
-x1 = 1.5 + (3 * np.cos(mid_points))
-y1 = 3 * np.sin(mid_points)
+x1 = 1.5 + (6.0 * np.cos(mid_points))
+y1 = 6.0 * np.sin(mid_points)
 cartesian_boundary = np.column_stack((x1,y1))
 # convert cartesian boundary to polar boundary
 origin = [0,0]
