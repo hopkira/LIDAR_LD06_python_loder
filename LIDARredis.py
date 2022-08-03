@@ -27,8 +27,8 @@ segments = 90
 angle_bins = pd.interval_range(start = 0, end = 2*math.pi, periods = segments)
 # Calculate a list of mid-points to calculate cartesian co-ords
 mid_points = angle_bins.mid.tolist()
-x1 = 1.5 + (5.5 * np.cos(mid_points))
-y1 = 5.5 * np.sin(mid_points)
+x1 = 1.5 + (3 * np.cos(mid_points))
+y1 = 3 * np.sin(mid_points)
 cartesian_boundary = np.column_stack((x1,y1))
 # convert cartesian boundary to polar boundary
 origin = [0,0]
@@ -38,8 +38,8 @@ mid_points = mid_points[lidar_start:lidar_end] # narrow list to angles that the 
 
 # create cartesian bounding box for straight reverse
 # collision detection
-bx1, by1 = [-10,-0.4]
-bx2, by2 = [-0.2,0.4]
+bx1, by1 = [-25,-3]
+bx2, by2 = [-1.5,3]
 ll = np.array([bx1, by1])  # lower-left
 ur = np.array([bx2, by2])  # upper-right
 
