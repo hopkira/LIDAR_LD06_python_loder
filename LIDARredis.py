@@ -82,9 +82,9 @@ try:
             inidx = np.all(np.logical_and(ll <= points, points <= ur), axis=1)
             inbox = points[inidx]
             try:
-                min_x = np.amin(inbox[:,0])
+                min_x = np.amax(inbox[:,0]) # nearest point to dog
             except ValueError:
-                min_x = -25.0
+                min_x = -25.0 # default is 2.5m away
             mem.storeState("reverse",min_x)
             # The following is for display only; not needed when running for real
             outbox = points[np.logical_not(inidx)]
