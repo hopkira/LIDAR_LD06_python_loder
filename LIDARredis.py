@@ -25,13 +25,21 @@ segments = 90
 angle_bins = pd.interval_range(start = 0, end = 2*math.pi, periods = segments)
 # Calculate a list of mid-points to calculate cartesian co-ords
 mid_points = angle_bins.mid.tolist()
-x1 = 7.0 * np.cos(mid_points)
+x1 = 1.5 + (5.5 * np.cos(mid_points))
 y1 = 5.5 * np.sin(mid_points)
-ellipse = np.column_stack((x1,y1))
+cartesian_boundary = np.column_stack((x1,y1))
+# convert cartesian boundary to polar boundary
 origin = [0,0]
-boundary = np.linalg.norm(ellipse - origin, axis=1)
+boundary = np.linalg.norm(cartesian_boundary - origin, axis=1)
 boundary = boundary[lidar_start:lidar_end]
 mid_points = mid_points[lidar_start:lidar_end] # narrow list to angles that the device can see
+
+# create cartesian bounding box for straight reverse
+# collision detection
+bx1, by1 = [-10,-0.4]
+bx2, by2 = [-0.2,0.4]
+ll = np.array([bx1, by1])  # lower-left
+ur = np.array([bx2, by2])  # upper-right
 
 # TODO need a routine to calculate blockers behind the dog
 # https://stackoverflow.com/questions/33051244/numpy-filter-points-within-bounding-box
@@ -66,13 +74,24 @@ try:
             mem.storeState("rotate",minimum_distance)
             # Visualize
             # convert the polar co-ordinates into x and y arrrays
-            # x = min_dists * np.cos(mid_points)
-            # y = min_dists * np.sin(mid_points)
-            # final = np.column_stack((x,y))
+            x = min_dists * np.cos(mid_points)
+            y = min_dists * np.sin(mid_points)
+            points = np.column_stack((x,y))
+            inidx = np.all(np.logical_and(ll <= points, points <= ur), axis=1)
+            inbox = points[inidx]
+            min_x = np.amin(inbox[:,0])
+            mem.storeState("reverse",min_x)
+            # The following is for display only; not needed when running for real
+            outbox = points[np.logical_not(inidx)]
+            rect = np.array([[bx1, by1], [bx1, by2], [bx2, by2], [bx2, by1], [bx1, by1]])
+            plt.plot(inbox[:, 0], inbox[:, 1], 'rx',
+                     outbox[:, 0], outbox[:, 1], 'bo',
+                     rect[:, 0], rect[:, 1], 'g-')
+            plt.plot(min_x,0,'rD')
+            plt.plot(x1,y1,'r-') # plot turning boundary
+            plt.gca().invert_yaxis()    
+            plt.show()
             # plt.plot(x,y)
-            # plt.plot(x1,y1)
-            # plt.gca().invert_yaxis()
-            # plt.show() 
             #now = time.time()
             #print(now-last)
             #last = now
