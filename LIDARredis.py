@@ -87,13 +87,17 @@ try:
                 min_x = -25.0 # default is 2.5m away
             mem.storeState("reverse",min_x)
             # The following is for display only; not needed when running for real
+            if minimum_distance > 0 :
+                colour = 'g-'
+            else:
+                colour = 'r-'
             outbox = points[np.logical_not(inidx)]
             rect = np.array([[bx1, by1], [bx1, by2], [bx2, by2], [bx2, by1], [bx1, by1]])
             plt.plot(inbox[:, 0], inbox[:, 1], 'rx',
-                     outbox[:, 0], outbox[:, 1], 'bo',
-                     rect[:, 0], rect[:, 1], 'g-')
+                     outbox[:, 0], outbox[:, 1], 'go',
+                     rect[:, 0], rect[:, 1], 'r-')
             plt.plot(min_x,0,'rD')
-            plt.plot(x1, y1,'r-') # plot turning boundary
+            plt.plot(x1, y1, colour) # plot turning boundary
             plt.gca().invert_yaxis()    
             plt.show()
             # plt.plot(x,y)
