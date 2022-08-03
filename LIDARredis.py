@@ -81,9 +81,11 @@ try:
             points = np.column_stack((x,y))
             inidx = np.all(np.logical_and(ll <= points, points <= ur), axis=1)
             inbox = points[inidx]
-            min_x = -1.0
-            #min_x = np.amin(inbox[:,0])
-            #mem.storeState("reverse",min_x)
+            try:
+                min_x = np.amin(inbox[:,0])
+            except ValueError:
+                min_x = -25.0
+            mem.storeState("reverse",min_x)
             # The following is for display only; not needed when running for real
             outbox = points[np.logical_not(inidx)]
             rect = np.array([[bx1, by1], [bx1, by2], [bx2, by2], [bx2, by1], [bx1, by1]])
