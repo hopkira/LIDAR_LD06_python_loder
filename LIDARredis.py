@@ -4,7 +4,9 @@ import math
 import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
-from memory import Memory as mem
+from memory import Memory
+
+mem = Memory()
 
 ser = serial.Serial(port='/dev/lidar360',
                     baudrate=230400,
