@@ -93,7 +93,7 @@ try:
                      outbox[:, 0], outbox[:, 1], 'bo',
                      rect[:, 0], rect[:, 1], 'g-')
             plt.plot(min_x,0,'rD')
-            plt.plot(cartesian_boundary,'r-') # plot turning boundary
+            plt.plot(x1, y1,'r-') # plot turning boundary
             plt.gca().invert_yaxis()    
             plt.show()
             # plt.plot(x,y)
