@@ -45,16 +45,16 @@ class Memory():
             key (str): Name of the key
             value (float): New value for the key 
         '''
-        print("Called: ", key, value)
+        # print("Called: ", key, value)
         old_value = self.r.get(str(key) + ":now")
         if not old_value:
             old_value = 0.0
-        print("Old value: ", old_value)
+        # print("Old ", key, " ", value: ", old_value)
         self.r.set(str(key) + ":old", old_value )
         old_value = self.r.get(str(key) + ":time:now")
         if not old_value:
             old_value = 0.0
-        print("Old time value: ", old_value)
+        print("New ",key," value: ", value)
         self.r.set(str(key) + ":time:old", old_value)
         self.r.set(str(key) + ":now",str(value))
         self.r.set(str(key) + ":time:now",str(time.time()))
