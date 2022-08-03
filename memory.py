@@ -54,7 +54,7 @@ class Memory():
         old_value = self.r.get(str(key) + ":time:now")
         if not old_value:
             old_value = 0.0
-        print("New ",key," value: ", value)
+        print("New",key,"value:", value)
         self.r.set(str(key) + ":time:old", old_value)
         self.r.set(str(key) + ":now",str(value))
         self.r.set(str(key) + ":time:now",str(time.time()))
