@@ -58,7 +58,6 @@ try:
         if len(angles) == 468 and len(distances) == 468:
             # if(i % 40 == 39):
             # create a numpy array from 468 angles/distances pair
-            print("points:",str(len(angles)), str(len(distances)))
             readings = np.column_stack((angles,distances))
             # work out which reading fits in which angle bin
             bin_index = pd.cut(readings[:,0], angle_bins)
@@ -68,10 +67,8 @@ try:
             min_dists = binned_distances.groupby([bin_index]).min()
             # turn the 90 min dist readings into an array
             min_dists = min_dists.values.reshape(segments)
-            print("Array:",np.shape(min_dists))
             # narrow the min distances to the angles that can be seen
             min_dists = min_dists[lidar_start:lidar_end]
-            print("Narrow Array:",np.shape(min_dists))
             # Check if it is safe to turn
             # A negative figure means it isn't; a positive one means it is
             # the scale of the value gives an indication of how safe it is 
