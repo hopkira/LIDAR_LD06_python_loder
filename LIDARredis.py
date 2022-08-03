@@ -68,6 +68,7 @@ try:
             min_dists = binned_distances.groupby([bin_index]).min()
             # turn the 90 min dist readings into an array
             min_dists = min_dists.values.reshape(segments)
+            print("Array:",np.shape(min_dists))
             # narrow the min distances to the angles that can be seen
             min_dists = min_dists[lidar_start:lidar_end]
             # Check if it is safe to turn
