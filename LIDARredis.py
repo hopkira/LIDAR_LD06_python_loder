@@ -71,6 +71,7 @@ try:
             print("Array:",np.shape(min_dists))
             # narrow the min distances to the angles that can be seen
             min_dists = min_dists[lidar_start:lidar_end]
+            print("Narrow Array:",np.shape(min_dists))
             # Check if it is safe to turn
             # A negative figure means it isn't; a positive one means it is
             # the scale of the value gives an indication of how safe it is 
