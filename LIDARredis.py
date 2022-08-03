@@ -76,7 +76,7 @@ try:
             # A negative figure means it isn't; a positive one means it is
             # the scale of the value gives an indication of how safe it is 
             # to rotate
-            minimum_distance = np.amin(min_dists - boundary)
+            minimum_distance = np.nanmin(min_dists - boundary)
             mem.storeState("rotate",minimum_distance)
             # Visualize
             # convert the polar co-ordinates into x and y arrrays
@@ -86,7 +86,7 @@ try:
             inidx = np.all(np.logical_and(ll <= points, points <= ur), axis=1)
             inbox = points[inidx]
             try:
-                min_x = np.amax(inbox[:,0]) # nearest point to dog
+                min_x = np.nanmax(inbox[:,0]) # nearest point to dog
             except ValueError:
                 min_x = -25.0 # default is 2.5m away
             mem.storeState("reverse",min_x)
